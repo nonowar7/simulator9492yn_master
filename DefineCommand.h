@@ -18,4 +18,4 @@ public:
     void doCommand() override;
 };
 
-#endif 
+#endif
