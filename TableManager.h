@@ -25,8 +25,10 @@
 using namespace std::chrono_literals;
 using namespace std;
 
-// hey im here
-
+/*
+ * responsibility - handling all the information
+ * and data in the program via hash maps
+ */
 class TableManager {
 
     unordered_map<string, double> pathToValue;
@@ -39,6 +41,7 @@ class TableManager {
 
 public:
 
+    // static instance
     static TableManager* getInstance(){
         static TableManager* instance;
         if (instance == NULL) {
@@ -47,6 +50,7 @@ public:
         return instance;
     }
 
+    // explanations in cpp file
     int getAddressesFromFile() ;
     void bindStringToPath(const string& var, const string& path);
     bool isVarInTable(const string& varName) ;
@@ -60,23 +64,44 @@ public:
     void informSimulator(const string& path) ;
 
 
+    // getter
     unordered_map<string,double> getStringToValueMap() const {
         return this->stringToValue;
     }
 
+    /*
+     * function is called from OpenDataServer -
+     * opened when we create the first reading socket.
+     * this function reads data from the simulator once,
+     * then sends it to TableManager.
+     */
     static void* firstReadFromSimulator(void* t) {
 
         TableManager* tableManager = TableManager::getInstance();
+
+        // creating buffer for reading
         char buffer[BUFFER_SIZE];
         bzero(buffer,BUFFER_SIZE);
 
+        // reading data
         ssize_t readValue = read(((Threader *) t)->getThreader().serverSocket, buffer, BUFFER_SIZE);
 
-        string str = string(buffer);
+        // checking data received properly
+        if (readValue < 0) {
+            throw exception();
+        }
 
+        // sending data to TableManager proccess.
+        string str = string(buffer);
         str = tableManager->cut23Values(str);
     }
 
+    /*
+    * function is called from OpenDataServer -
+    * opened when we create the second reading socket.
+    * this function reads data from the simulator as long as
+    * the program runs.
+    */
     static void* generalReadFromSimulator(void* t) {
 
         TableManager* tableManager = TableManager::getInstance();
@@ -85,15 +110,23 @@ public:
 
         ssize_t readValue = 0;
 
+        // considering frequency of reading
         double timeRound = (double)MILLI_IN_SECONDS/((Threader *) t)->getThreader().hz;
         string str1;
 
+        /*
+         * reading from simulator as long as the data is received
+         * without error ("infinite loop").
+         */
         while (readValue!=-1) {
 
+            // measuring initial time of action
             auto currentTime = chrono::steady_clock::now();
 
+            // reading data to buffer
             readValue = read(((Threader *)t)->getThreader().serverSocket, buffer, BUFFER_SIZE);
 
+            // sending data for update
             if (!str1.empty()) {
                 str1 += string(buffer);
                 str1 = tableManager->cut23Values(str1);
@@ -101,12 +134,17 @@ public:
                 str1 = string(buffer);
                 str1 = tableManager->cut23Values(str1);
             }
+
+            // clearing buffer
             bzero(buffer, BUFFER_SIZE);
+
+            // measuring current time in respect of initial time
             auto endTime = chrono::steady_clock::now();
             double timeUsed = chrono::duration_cast<chrono::milliseconds>(endTime-currentTime).count();
             double remained = timeRound-timeUsed;
-            if (remained > 0) {
 
+            // sleeping if needed (if a ten'th of a second is not passed)
+            if (remained > 0) {
                 this_thread::sleep_for(std::chrono::milliseconds((int)remained));
             }
         }

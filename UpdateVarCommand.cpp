@@ -8,11 +8,10 @@
 
 using namespace std;
 
-
 void UpdateVarCommand::doCommand() {
 
+    // setting the var's value  via SY
     ShuntingYard* sy = ShuntingYard::getInstance();
-
     double varValue = sy->calculateSYard(this->value)->calculate();
 
     TableManager* tableManager = TableManager::getInstance();

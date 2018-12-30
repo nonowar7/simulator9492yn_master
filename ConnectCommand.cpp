@@ -29,6 +29,7 @@ ConnectCommand::ConnectCommand(vector<string> line) {
         throw exception();
     }
 
+    // calculating members
     this->ip = line.at(FIRST_EXP_LOC);
     string portExp = line.at(SECOND_EXP_LOC);
     ShuntingYard* sy = ShuntingYard::getInstance();

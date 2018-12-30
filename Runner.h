@@ -10,15 +10,31 @@
 
 using namespace std;
 
+/*
+ * running the program from a file (running lexer and
+ * then parser via lines commited).
+ */
 class Runner {
-mutex mu;
+
+    // mutex variable for the program
+   mutex mu;
+
 public:
+
+    /*
+     * running lexer and parser with line data
+     */
     void runTheProgram(const string& line, Lexer* lexer, Parser* parser) {
         lexer->setLine(line);
         parser->setLine(lexer->lexicalAnalysis());
         parser->parserAnalysis();
     }
+
+    /*
+     * program initialization
+     */
     void run(int argc, char* argv[]) {
+
         // download addresses from file
         TableManager *tableManager = TableManager::getInstance();
         int paths = tableManager->getAddressesFromFile();
@@ -26,12 +42,20 @@ public:
             cout << "problem with paths" << endl;
             return;
         }
+
         // set mutex variable
         Threader *threader = Threader::getInstance();
         threader->setMutex(&mu);
+
+        // set lexer and parser objects
         Lexer lexer;
         Parser parser;
         string line;
+
+        /*
+         * verifying validation of input and reading it,
+         * then calling 'run the program' ot
+         */
         if (argc > 1) {
             string fileName = argv[1];
             ifstream file(fileName);
@@ -42,21 +66,12 @@ public:
                 file.close();
             }
         } else {
-            bool flag = true;
-            while (flag) {
-                getline(cin, line);
-                if (!line.empty()) {
-                    runTheProgram(line, &lexer, &parser);
-                } else {
-                    flag = false;
-                }
-            }
+            return;
         }
+
+        // closing sockets
         close(threader->getThreader().serverSocket);
         close(threader->getThreader().clientSocket);
-
-        // if i try to close the thread it exists bad, why?
-        // threader->getThreader().tServer->join();
     }
 };
 

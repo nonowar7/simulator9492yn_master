@@ -8,22 +8,25 @@
 
 using namespace std;
 
+/*
+ * structure of variables that are needed
+ * for read/write actions
+ */
 struct threadData {
 
+    // sockets
     int serverSocket;
-
     int clientSocket;
 
+    // frequency of reading
     int hz;
 
+    // variable and it's value (updating simulator)
     string var;
-
     double value;
 
+    // mutex for locking (set from Runner)
     mutex* mut;
-
-    thread* tServer;
-
 };
 
 class Threader {
@@ -31,12 +34,15 @@ class Threader {
 private:
 
     threadData tData;
+
 public:
 
+    // getter
     threadData getThreader() const {
         return this->tData;
     }
 
+    // setters
     void setServerSocket(int serverSocket) {
         this->tData.serverSocket = serverSocket;
     }
@@ -61,10 +67,7 @@ public:
         this->tData.value = value;
     }
 
-    void setThreadServer(thread* t) {
-        this->tData.tServer = t;
-    }
-
+    // static instance
     static Threader* getInstance(){
         static Threader* instance;
         if (instance == NULL) {

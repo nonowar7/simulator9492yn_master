@@ -10,6 +10,10 @@
 
 using namespace std;
 
+/*
+ * responsibility - creating the connection between
+ * the user (client) to the simulator (server)
+ */
 class ConnectCommand : public Command {
 
 private:
@@ -19,10 +23,11 @@ private:
 
 public:
 
+    //ctor
     explicit ConnectCommand(vector<string>line);
 
+    // creating the connection
     void doCommand() override;
-
     int connectToServer(string ip, int port);
 
 };

@@ -24,17 +24,21 @@ using namespace std::chrono_literals;
 using namespace std;
 
 OpenServerCommand::OpenServerCommand(vector<string> line) {
+
     ShuntingYard* shuntingYard = ShuntingYard::getInstance();
     string firstExpression = line.at(FIRST_EXP_LOC);
     string secondExpression = line.at(SECOND_EXP_LOC);
     this->port = (int)shuntingYard->calculateSYard(firstExpression)->calculate();
     this->hz = (int)shuntingYard->calculateSYard(secondExpression)->calculate();
+
     if( this->port < 0 || this->hz < 0) {
         throw exception();
     }
+
 }
 
 void OpenServerCommand::doCommand() {
+
     int retCode = openServer(this->port, this->hz);
     if (retCode <0 ) {
         throw "problem in server opening ";
@@ -70,30 +74,37 @@ int OpenServerCommand::openServer(int port, int Hz) {
     }
 
     // 3) listen (mark socket for listen- wait for client connection)
-
     if (listen(listener, CONNECTIONS_LIMIT) < 0) {
         cout << "can't mark socket for listening" << endl;
         return -3;
     }
 
-    // 4) accept a call from a client and save socket to struct
+    // 4) accept a call from a client
     int client = sizeof(newAddress);
     int newSocket = accept(listener, (struct sockaddr *) &newAddress, (socklen_t *) &client);
     if (newSocket < 0) {
         cout << "can't receive client" << endl;
         return -4;
     }
+
+    // 5) creating the threads
     createThread(newSocket);
     return 0;
+
 }
 
 void OpenServerCommand::createThread(int socket) {
+
+    // saving critical data in Threader
     Threader *t = Threader::getInstance();
     t->setServerSocket(socket);
     t->setServerHz(this->hz);
+
+    // creating first socket (reading initial data from simulator)
     std::thread tServer(TableManager::firstReadFromSimulator, (void *) t);
     tServer.join();
+
+    // creating second socket (reading for the rest of the program)
     std::thread tServer2(TableManager::generalReadFromSimulator, (void *) t);
-    t->setThreadServer(&tServer2);
     tServer2.detach();
 }
