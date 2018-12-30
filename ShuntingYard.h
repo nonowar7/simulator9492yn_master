@@ -18,7 +18,7 @@ class ShuntingYard {
 
 private:
 
-    // members
+    // members.
     stack<char> theStack;
     queue<string> theQueue;
 

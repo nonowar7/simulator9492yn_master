@@ -20,7 +20,7 @@ void UpdateVarCommand::doCommand() {
     if(tableManager->isVarBindToAddress(this->var)){
         // not local
 
-        // update the var - value table
+        // update the var - value table.
         tableManager->updateLocalVar(this->var, varValue);
 
         // update other variables and inform simulator

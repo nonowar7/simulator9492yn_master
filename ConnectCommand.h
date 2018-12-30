@@ -12,7 +12,7 @@ using namespace std;
 
 /*
  * responsibility - creating the connection between
- * the user (client) to the simulator (server)
+ * the user (client) to the simulator (server).
  */
 class ConnectCommand : public Command {
 

@@ -95,7 +95,7 @@ int OpenServerCommand::openServer(int port, int Hz) {
 
 void OpenServerCommand::createThread(int socket) {
 
-    // saving critical data in Threader
+    // saving critical data in Threader.
     Threader *t = Threader::getInstance();
     t->setServerSocket(socket);
     t->setServerHz(this->hz);

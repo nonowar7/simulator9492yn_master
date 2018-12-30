@@ -80,7 +80,7 @@ int ConnectCommand::connectToServer(string ip, int port) {
 
     }
 
-    // 3) save socket to  struct
+    // 3) save socket to  struct.
 
     Threader *t = Threader::getInstance();
     t->setClientSocket(listener);

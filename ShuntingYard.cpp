@@ -242,7 +242,7 @@ Expression* ShuntingYard::calculateSYard(const string& str) {
     string lastChar;
 
     while (!temp.empty()) {
-        // skip spaces in the string
+        // skip spaces in the string.
         if (temp.at(0) == SPACE || temp.at(0) == TAB) {
             temp = temp.substr(1, temp.size()-1);
             continue;

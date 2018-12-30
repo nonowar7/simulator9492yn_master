@@ -11,7 +11,7 @@ using namespace std;
 
 /*
  * responsibility - connecting the simulator
- * as a client to a server (the program).
+ * as a client to a server (the program)
  */
 class OpenServerCommand : public Command {
 

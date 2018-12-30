@@ -1,5 +1,7 @@
 #include "Runner.h"
 
+
+// program initialization
 int main (int argc, char* argv[]) {
     try{
         Runner runner;

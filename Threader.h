@@ -67,7 +67,7 @@ public:
         this->tData.value = value;
     }
 
-    // static instance
+    // static instance.
     static Threader* getInstance(){
         static Threader* instance;
         if (instance == NULL) {

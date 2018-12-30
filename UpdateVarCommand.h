@@ -16,7 +16,7 @@ using namespace std;
 class UpdateVarCommand : public Command{
 
 private:
-    // members
+    // members.
     string var;
     string value;
 

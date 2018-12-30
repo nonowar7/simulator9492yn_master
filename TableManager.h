@@ -135,7 +135,7 @@ public:
                 str1 = tableManager->cut23Values(str1);
             }
 
-            // clearing buffer
+            // clearing buffer.
             bzero(buffer, BUFFER_SIZE);
 
             // measuring current time in respect of initial time

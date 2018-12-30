@@ -54,7 +54,7 @@ public:
 
         /*
          * verifying validation of input and reading it,
-         * then calling 'run the program' ot
+         * then calling 'run the program' or existing.
          */
         if (argc > 1) {
             string fileName = argv[1];

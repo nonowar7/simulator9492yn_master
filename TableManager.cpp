@@ -209,7 +209,7 @@ void TableManager::updateClientData(const string& var, double num) {
 /*
  * passing the variable's that has been updated
  * to the simulator (informing is made immediately
- * after variable is updated
+ * after variable is updated.
  */
 void TableManager::informSimulator(const string& path) {
 
