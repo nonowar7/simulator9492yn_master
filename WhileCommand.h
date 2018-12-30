@@ -7,12 +7,8 @@
 
 class WhileCommand : public ConditionCommand{
 public:
-
-    WhileCommand(BooleanExpression* booleanExpression): ConditionCommand(booleanExpression){
-
-    }
-
+    explicit WhileCommand(BooleanExpression* booleanExpression): ConditionCommand(booleanExpression){}
     void doCommand() override;
 };
 
-#endif //NEWSIMULATOR_WHILECOMMAND_H
+#endif 
