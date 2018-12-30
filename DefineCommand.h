@@ -12,12 +12,10 @@ class DefineCommand : public Command{
     // The variable value
     double value;
 public:
-
     // Constructor
     explicit DefineCommand(vector<string>* line);
-
     // Define new var, and save it in the relevant table
     void doCommand() override;
 };
 
-#endif //NEWSIMULATOR_DEFINECOMMAND_H
+#endif

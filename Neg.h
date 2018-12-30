@@ -1,14 +1,15 @@
-
-
 #ifndef SIMULATOR9492YN_MASTER_NEG_H
 #define SIMULATOR9492YN_MASTER_NEG_H
 
 #include "UnaryExpression.h"
 
+/**
+ * Neg expression
+ */
 class Neg : public UnaryExpression {
 public:
-    // constructor - uses super class constructor
-    Neg(Expression* ex):UnaryExpression(ex){}
+    // Constructor
+   explicit Neg(Expression* ex):UnaryExpression(ex){}
 
     // calculation as negation by -1 multiplication
     double calculate() override{
@@ -16,4 +17,4 @@ public:
     }
 };
 
-#endif //SIMULATOR9492YN_MASTER_NEG_H
+#endif

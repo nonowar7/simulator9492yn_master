@@ -3,7 +3,9 @@
 
 #include "BinaryExpression.h"
 
-
+/**
+ * Minus expression
+ */
 class Minus : public BinaryExpression {
 public:
     // constructor - uses super class constructor
@@ -13,5 +15,5 @@ public:
     }
 };
 
-#endif //SIMULATOR9492YN_MINUS_H
+#endif
 

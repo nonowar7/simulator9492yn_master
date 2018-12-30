@@ -3,17 +3,21 @@
 
 #include "BinaryExpression.h"
 
+/**
+ * Dividing expression
+ */
 class Divide : public BinaryExpression {
 public:
-    // constructor - uses super class constructor
+    // Constructor
     Divide(Expression* leftExp, Expression* rightExp):BinaryExpression(leftExp,rightExp){}
-
     double calculate() override{
         if(this->getRightExp()->calculate() == 0){
-            throw "cannot divide by 0";
+            // cannot divide by 0
+            throw exception();
         }
+        // Return the calculation of the dividing operator
         return this->getLeftExp()->calculate() / this->getRightExp()->calculate();
     }
 };
 
-#endif //SIMULATOR9492YN_DIVIDE_H
+#endif

@@ -4,19 +4,15 @@
 #include "Command.h"
 using namespace std;
 
-// Expression is abstract
-// everything will be an expression.
-// for new - we have : Num as independent derived class
-//                     BinaryExpression - everything else.
-
+/**
+ * Expression is an abstract class, with pure virtual method calculate.
+ */
 class Expression {
 public:
-    /*
-     * output - a double
-     * operation - returns the value of the expression
+    /**
+     * Calculate the expression and return the result in double
      */
     virtual double calculate()=0;
-
 };
 
-#endif //SIMULATOR9492YN_EXPRESSION_H
+#endif

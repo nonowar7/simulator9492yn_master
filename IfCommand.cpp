@@ -1,6 +1,9 @@
-#include <iostream>
 #include "IfCommand.h"
 
+/**
+ * doCommand in ifCommand checks if the boolean expression is true,
+ * If it does, it preform all the commands in the vector toExecute.
+ */
 void IfCommand::doCommand() {
     BooleanExpression* boolExp = getBoolExpression();
     vector<Command*> toExecute = getCommands();
