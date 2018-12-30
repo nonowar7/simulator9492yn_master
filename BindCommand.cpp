@@ -8,7 +8,6 @@
  * we need to get as input a direct path to the relevant place in the simulator,
  * or Alternative to get other variable that holds the path.
  */
-
 void BindCommand::doCommand() {
     TableManager* tableManager = TableManager::getInstance();
     // Put address pattern in
@@ -31,7 +30,6 @@ void BindCommand::doCommand() {
             // Update the initial value of the variable in the relevant table
             double value = tableManager->getVarValue(bindTo);
             tableManager->updateLocalVar(varName,value);
-
         } else{
             // Cant bind variable to other variable that dose not have address
             throw exception();
