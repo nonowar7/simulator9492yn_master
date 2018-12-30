@@ -2,7 +2,7 @@
 
 /**
  * doCommand in ifCommand checks if the boolean expression is true,
- * If it does, it preform all the comands in the vector toExecute.
+ * If it does, it preform all the commands in the vector toExecute.
  */
 void IfCommand::doCommand() {
     BooleanExpression* boolExp = getBoolExpression();
