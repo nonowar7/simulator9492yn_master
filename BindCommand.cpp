@@ -19,12 +19,14 @@ void BindCommand::doCommand() {
     if(!match.empty()){
         // Cut the quotation marks from the path
         string path = bindTo.substr(1, bindTo.size()-2);
+        // Add the variable name and its path to the relevant table
         tableManager->bindStringToPath(varName,path);
     } else {
         // Checks if the variable has an address
         if(tableManager->isVarBindToAddress(bindTo)){
             // Get the address to bind from the table manager
             string address = tableManager->getVarAddress(bindTo);
+            // Bind the address for the new variable
             tableManager->bindStringToPath(varName,address);
             // Update the initial value of the variable in the relevant table
             double value = tableManager->getVarValue(bindTo);
