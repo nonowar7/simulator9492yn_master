@@ -3,10 +3,13 @@
 
 #include "ConditionCommand.h"
 
+/**
+ * If command is a condition command.
+ */
 class IfCommand : public ConditionCommand{
 public:
-    IfCommand(BooleanExpression* booleanExpression):ConditionCommand(booleanExpression){}
+    explicit IfCommand(BooleanExpression* booleanExpression):ConditionCommand(booleanExpression){}
     void doCommand() override;
 };
 
-#endif //NEWSIMULATOR_IFCOMMAND_H
+#endif
