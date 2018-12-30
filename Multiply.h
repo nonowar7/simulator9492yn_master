@@ -3,14 +3,16 @@
 
 #include "BinaryExpression.h"
 
+/**
+ * Multiply expression
+ */
 class Multiply : public BinaryExpression {
 public:
-    // constructor - uses super class constructor
+    // Constructor
     Multiply(Expression* leftExp, Expression* rightExp):BinaryExpression(leftExp,rightExp){}
-
     double calculate() override{
         return this->getLeftExp()->calculate() * this->getRightExp()->calculate();
     }
 };
 
-#endif //SIMULATOR9492YN_MULTIPLY_H
+#endif
