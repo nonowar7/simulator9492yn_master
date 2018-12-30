@@ -3,8 +3,6 @@
 
 #include "Expression.h"
 
-// yuval added this
-
 /**
  * Binary Expression contains two operands (represent as expression),
  * separated by one operator.
